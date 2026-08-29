@@ -1,53 +1,76 @@
 # Nobook
+
 <p align="center">
-  <img src='images/nobook_github_cover.png' height='200' alt="nobook_cover">
+  <img src="images/nobook_github_cover.png" height="200" alt="Nobook cover">
 </p>
 
-<div align="center">Nobook is a lightweight Android application to browse facebook.</div>
+<div align="center">A lightweight Android app for a cleaner Facebook browsing experience.</div>
 
-## • Features
+## Features
 
-*  Hides clearly labelled sponsored ads without blocking ordinary posts or media.
-*  Blocks suggested posts.
-*  Downloads media.
-* And more.
+- **Local ad blocking** — hides clearly labelled sponsored posts without blocking ordinary posts, links, or media.
+- **Feed controls** — hide suggested posts, Reels, Stories, groups, or People You May Know when you want a quieter feed.
+- **Media downloads** — save supported Facebook images and videos to your Downloads folder.
+- **Copy to clipboard** — copy supported media from the media viewer.
+- **Mobile and desktop layouts** — choose the layout that works best for your device.
+- **Reading preferences** — use pinch-to-zoom, sticky navigation, immersive mode, and AMOLED black mode.
+- **Facebook link support** — open Facebook links from other apps, including `facebook.com`, `www.facebook.com`, and `m.facebook.com`.
+- **Performance improvements** — reduce background WebView work and pause off-screen video processing to improve battery life while browsing long feeds.
 
-## • Installation
+## Privacy and ad blocking
 
-[<img src='images/get-it-on-github.png' alt='Get it on GitHub' height = "90">](https://github.com/ycngmn/Nobook/releases/latest)
+Nobook runs its filtering inside the Facebook WebView on your device. It does not proxy your traffic or send browsing data to a separate ad-blocking service. The ad blocker is designed to act only on content Facebook identifies as sponsored.
 
-## • Setup
+Facebook changes its page structure regularly, so filtering can occasionally miss an ad or require an update. If a normal post is hidden, please report the device model, app version, language, and whether mobile or desktop layout was enabled.
 
-1.  **Clone the repository**
-    * In Android Studio:
-        * File > New > Project from Version Control
-        * Paste `https://github.com/ycngmn/Nobook.git` and clone.
-    * Or via terminal:
-    ```bash
-    git clone https://github.com/ycngmn/Nobook.git
-    cd Nobook
-    ``` 
-2.  **Open in Android Studio.** (only if cloned via terminal)
-    * Select Open an Existing Project and choose the cloned folder.
-3. **Sync the project** to download dependencies.
-4. **Run the app** in a device or emulator.
+## Installation
 
-## • Continuous integration
+[<img src="images/get-it-on-github.png" alt="Get it on GitHub" height="90">](https://github.com/ycngmn/Nobook/releases/latest)
 
-Pull requests and pushes to `main` run the Android CI workflow. It uses JDK 17, runs unit tests, builds a debug APK, and uploads the APK as a workflow artifact. Versioned releases are built by the release workflow when a `v*.*.*` tag is pushed.
+Download the latest APK from the project's GitHub Releases page. Android may ask you to allow installation from the source you used to download the APK.
 
+## Building from source
 
-## • Ad blocking
+1. Clone the repository:
 
-Nobook's ad blocker runs locally inside the Facebook WebView. It only hides content that Facebook marks as sponsored, does not proxy traffic, and leaves regular posts, links, and media untouched. Facebook can change its markup at any time, so please report false positives or missed ads with the device, language, and layout details.
+   ```bash
+   git clone https://github.com/mhamzas/Nobook.git
+   cd Nobook
+   ```
 
-## • Contributing
+2. Open the project in Android Studio.
+3. Allow Gradle to sync and install any requested Android SDK components.
+4. Run the `app` configuration on an emulator or Android device.
 
-Contributions to the project are welcome. Please follow these guidelines:
+To build a local debug APK from a terminal with JDK 17 and the Android SDK installed:
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Submit a pull request with a clear description of your changes.
+```bash
+sh ./gradlew assembleDebug
+```
 
-## Acknowledgement :
-* [@KevinnZou/compose-webview-multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform)  
+The APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
+
+## Continuous integration
+
+GitHub Actions runs Android CI for pull requests and pushes to `main`. The workflow uses JDK 17, runs unit tests, builds a debug APK, and uploads it as the `nobook-debug-apk` artifact.
+
+Versioned release builds run when a `v*.*.*` tag is pushed. Release signing requires the repository's configured GitHub Actions signing secrets.
+
+## Contributing
+
+Contributions are welcome:
+
+1. Fork the repository.
+2. Create a branch for your feature or fix.
+3. Test mobile and desktop layouts where relevant.
+4. Submit a pull request with a clear description and testing notes.
+
+Please avoid including Facebook credentials, cookies, or personal account data in issues, pull requests, or test fixtures.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for the complete history of user-facing changes.
+
+## Acknowledgements
+
+- [compose-webview-multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform)
