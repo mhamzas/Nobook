@@ -32,7 +32,7 @@
     <string name="force_desktop_layout_may_not_be_suitable_for_smaller_display">Force desktop layout. Not suitable for small display.</string>
     <string name="use_two_fingers_to_zoom_in_or_out">Use two fingers to zoom in or out</string>
     <string name="customize_feed">Show or hide items</string>
-    <string name="hide_sponsored_ads_from_your_feed">Hide sponsored ads from feed</string>
+    <string name="hide_sponsored_ads_from_your_feed">Hide clearly labelled sponsored posts without affecting normal content</string>
     <string name="enable_download_button_on_media_view">Enable download button on media view</string>
     <string name="enable_copy_to_clipboard_button_on_media_view">Enable copy to clipboard button on media view</string>
     <string name="nobook_settings">Nobook settings</string>

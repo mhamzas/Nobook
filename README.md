@@ -7,7 +7,7 @@
 
 ## • Features
 
-*  Blocks sponsored ads.
+*  Hides clearly labelled sponsored ads without blocking ordinary posts or media.
 *  Blocks suggested posts.
 *  Downloads media.
 * And more.
@@ -32,6 +32,14 @@
 3. **Sync the project** to download dependencies.
 4. **Run the app** in a device or emulator.
 
+## • Continuous integration
+
+Pull requests and pushes to `main` run the Android CI workflow. It uses JDK 17, runs unit tests, builds a debug APK, and uploads the APK as a workflow artifact. Versioned releases are built by the release workflow when a `v*.*.*` tag is pushed.
+
+
+## • Ad blocking
+
+Nobook's ad blocker runs locally inside the Facebook WebView. It only hides content that Facebook marks as sponsored, does not proxy traffic, and leaves regular posts, links, and media untouched. Facebook can change its markup at any time, so please report false positives or missed ads with the device, language, and layout details.
 
 ## • Contributing
 

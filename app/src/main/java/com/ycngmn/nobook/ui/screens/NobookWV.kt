@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,6 +30,9 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.multiplatform.webview.web.LoadingState
 import com.multiplatform.webview.web.WebView
@@ -58,6 +62,7 @@ fun NobookWebView(
     val context = LocalContext.current
     val activity = LocalActivity.current
     val resources = LocalResources.current
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     val state = rememberSaveableWebViewState(url)
     val navigator = rememberWebViewNavigator(
@@ -80,6 +85,24 @@ fun NobookWebView(
         if (bundle == null) {
             navigator.loadUrl(url)
         }
+    }
+
+    DisposableEffect(lifecycleOwner, state) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_PAUSE -> runCatching {
+                    state.nativeWebView.onPause()
+                    state.nativeWebView.pauseTimers()
+                }
+                Lifecycle.Event.ON_RESUME -> runCatching {
+                    state.nativeWebView.onResume()
+                    state.nativeWebView.resumeTimers()
+                }
+                else -> Unit
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 
     // allow exiting while scrolling to top.
