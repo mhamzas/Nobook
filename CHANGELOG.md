@@ -2,7 +2,7 @@
 
 All notable Nobook changes are documented here.
 
-## Unreleased
+## 0.1.2
 
 ### New
 
@@ -27,4 +27,8 @@ All notable Nobook changes are documented here.
 ### Notes
 
 - Facebook frequently changes its page markup. Ad filtering and supported-link behavior should be tested on both mobile and desktop layouts after each release.
+
+## Unreleased
+
+No changes yet.
 - Release builds still require the repository's configured signing secrets in GitHub Actions.
